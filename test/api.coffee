@@ -38,3 +38,16 @@ describe 'Api', ->
     for day in result
       expect(day).to.include.all.keys 'rain', 'uv', 'astronomical', 'temp_max',
       'temp_min', 'extended_text'
+
+  it 'gets weather warnings for Carlton if there is any', ->
+    current_timestamp = new Date()
+    result = await api.warnings()
+    # Only check if we fetch the response from server
+    # There might not be any warning
+    expect(new Date api.response_timestamp()).to.be.afterTime current_timestamp
+
+  it 'get the warning with ID VIC_RC022_IDV36310', ->
+    result = await api.warning 'VIC_RC022_IDV36310'
+    expect(result.id).to.equal 'VIC_RC022_IDV36310'
+    expect(result.title).to.equal 'Flood Warning for Yarra River'
+    expect(result.type).to.equal 'flood_warning'
