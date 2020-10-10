@@ -1,0 +1,17 @@
+{
+  "name": "weather-au-api",
+  "version": "0.0.1",
+  "description": "NodeJS library for accessing api.weather.bom.gov.au",
+  "main": "api-min.js",
+  "repository": "git@github.com:nqngo/weather-au-api.git",
+  "author": "Nhat Ngo <me@nqngo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "coffeelint": "^2.1.0",
+    "coffeescript": "^2.5.1",
+    "uglify-es": "^3.3.9"
+  },
+  "dependencies": {
+    "bent": "^7.3.11"
+  }
+}
