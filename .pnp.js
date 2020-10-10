@@ -39,6 +39,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["bent", "npm:7.3.11"],
             ["chai", "npm:4.2.0"],
+            ["chai-datetime", "npm:1.7.0"],
             ["coffeelint", "npm:2.1.0"],
             ["coffeescript", "npm:2.5.1"],
             ["mocha", "npm:8.1.3"],
@@ -336,6 +337,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["get-func-name", "npm:2.0.0"],
             ["pathval", "npm:1.1.0"],
             ["type-detect", "npm:4.0.8"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["chai-datetime", [
+        ["npm:1.7.0", {
+          "packageLocation": "./.yarn/cache/chai-datetime-npm-1.7.0-c81917fc18-7f9c57470e.zip/node_modules/chai-datetime/",
+          "packageDependencies": [
+            ["chai-datetime", "npm:1.7.0"],
+            ["chai", "npm:4.2.0"]
           ],
           "linkType": "HARD",
         }]
@@ -2226,6 +2237,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["weather-au-api", "workspace:."],
             ["bent", "npm:7.3.11"],
             ["chai", "npm:4.2.0"],
+            ["chai-datetime", "npm:1.7.0"],
             ["coffeelint", "npm:2.1.0"],
             ["coffeescript", "npm:2.5.1"],
             ["mocha", "npm:8.1.3"],

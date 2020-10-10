@@ -18,9 +18,9 @@ task 'publish', 'Build and minify api.js for publishing', ->
   exec BUILD_CMD,
   (err, stdout, stderr) ->
     console.log stderr if err
-      exec MINIFY_CMD,
-      (err, stdout, stderr) ->
-        console.log stderr if err
+    exec MINIFY_CMD,
+    (err, stdout, stderr) ->
+      console.log stderr if err
 
 task 'lint', 'Run coffeelint on src/ and test/', ->
   exec 'coffeelint src/ test/',

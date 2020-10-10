@@ -243,7 +243,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:^4.2.0":
+"chai-datetime@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "chai-datetime@npm:1.7.0"
+  dependencies:
+    chai: ">1.9.0"
+  checksum: 7f9c57470e4916c00b8705d472dae1529bf7c5d6128226ba1eb642d708636fdaf95f275e5bd390f6f4014dd33c84353cb8004a91964c4d9cb8c467f2a1f7b22e
+  languageName: node
+  linkType: hard
+
+"chai@npm:>1.9.0, chai@npm:^4.2.0":
   version: 4.2.0
   resolution: "chai@npm:4.2.0"
   dependencies:
@@ -1944,6 +1953,7 @@ resolve@^0.6.3:
   dependencies:
     bent: ^7.3.11
     chai: ^4.2.0
+    chai-datetime: ^1.7.0
     coffeelint: ^2.1.0
     coffeescript: ^2.5.1
     mocha: ^8.1.3
