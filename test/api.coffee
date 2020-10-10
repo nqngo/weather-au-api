@@ -28,7 +28,7 @@ describe 'Api', ->
 
   it 'shows Carlton daily forecasts for the next 7 days', ->
     result = await api.forecasts_daily()
-    expect(result).to.have.lengthOf 8
+    expect(result).to.have.lengthOf.at.least 7
     # Set today to midnight
     today = new Date()
     today.setHours 0,0,0,0
