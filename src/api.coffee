@@ -35,6 +35,11 @@ class Api
     # Return a promise
     resp.data
 
+  forecasts_daily: ->
+    ###
+    Return the daily forecasts
+    ###
+
   location: ->
 
 module.exports = Api

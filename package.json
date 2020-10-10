@@ -7,8 +7,10 @@
   "author": "Nhat Ngo <me@nqngo.com>",
   "license": "MIT",
   "devDependencies": {
+    "chai": "^4.2.0",
     "coffeelint": "^2.1.0",
     "coffeescript": "^2.5.1",
+    "mocha": "^8.1.3",
     "uglify-es": "^3.3.9"
   },
   "dependencies": {
