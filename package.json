@@ -19,8 +19,10 @@
     "html-to-text": "^5.1.1"
   },
   "scripts": {
-    "prepare": "yarn cake publish",
-    "pretest": "yarn cake lint",
-    "test": "yarn cake test"
+    "build": "coffee --bare --compile --output api.js src/api.coffee",
+    "min": "uglifyjs -c -m --toplevel --mangle-props regex=/^_/ -o api-min.js --keep-classnames --keep-fnames api.js",
+    "prepare": "yarn build && yarn min",
+    "lint": "yarn coffeelint src/ test/",
+    "test": "yarn mocha -r coffeescript/register --extension coffee"
   }
 }
