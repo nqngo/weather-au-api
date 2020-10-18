@@ -16,4 +16,5 @@ lerna-debug.log*
 
 # Ignore intermediate asset
 api.js
+api-min.js
 test/*.js

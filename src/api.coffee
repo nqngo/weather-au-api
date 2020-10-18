@@ -33,13 +33,18 @@ class Api
       return []
     # The search API doesn't like the dash character.
     search = search.replace('-', '+')
+    try
+      resp = await get "#{API_BASE}/#{API_SEARCH}#{search}"
+      @_response_timestamp = await resp.metadata.response_timestamp
+      # If there is no result
+      unless resp.data.length
+        throw new Error "Not found"
+      @_geohash = await resp.data[0].geohash
+      @_location = await "#{API_LOCATION}/#{@_geohash}"
 
-    resp = await get "#{API_BASE}/#{API_SEARCH}#{search}"
-    @_response_timestamp = await resp.metadata.response_timestamp
-    @_geohash = await resp.data[0].geohash
-    @_location = await "#{API_LOCATION}/#{@_geohash}"
-
-    return resp.data
+      return resp.data
+    catch
+      return []
 
   forecasts_daily: ->
     ###
@@ -50,10 +55,12 @@ class Api
     ###
     unless @_geohash
       return []
-    resp = await get "#{API_BASE}/#{@_location}/#{API_FORECAST_DAILY}"
-    @_response_timestamp = await resp.metadata.response_timestamp
-
-    return resp.data
+    try
+      resp = await get "#{API_BASE}/#{@_location}/#{API_FORECAST_DAILY}"
+      @_response_timestamp = await resp.metadata.response_timestamp
+      return resp.data
+    catch
+      return []
 
   warnings: ->
     ###
@@ -64,10 +71,12 @@ class Api
     ###
     unless @_geohash
       return []
-    resp = await get "#{API_BASE}/#{@_location}/#{API_WARNINGS}"
-    @_response_timestamp = await resp.metadata.response_timestamp
-
-    return resp.data
+    try
+      resp = await get "#{API_BASE}/#{@_location}/#{API_WARNINGS}"
+      @_response_timestamp = await resp.metadata.response_timestamp
+      return resp.data
+    catch
+      return []
 
   warning: (id, wordwrap) ->
     ###
@@ -79,16 +88,34 @@ class Api
     ###
     unless id?.length
       return {}
-    resp = await get "#{API_BASE}/#{API_WARNINGS}/#{id}"
-    @_response_timestamp = await resp.metadata.response_timestamp
+    try
+      resp = await get "#{API_BASE}/#{API_WARNINGS}/#{id}"
+      @_response_timestamp = await resp.metadata.response_timestamp
+      output = resp.data
+      # HtmlToText config
+      config =
+        wordwrap: wordwrap
+        singleNewLineParagraphs: true
 
-    output = resp.data
-    # HtmlToText config
-    config =
-      wordwrap: wordwrap
-      singleNewLineParagraphs: true
+      output.message = htmlToText.fromString resp.data.message, config
+      return output
+    catch
+      return {}
 
-    output.message = htmlToText.fromString resp.data.message, config
-    return output
+  observations: ->
+    ###
+    Return the current location observation reading.
+    Return an empty object if geohash is not set.
+    Example:
+    https://api.weather.bom.gov.au/v1/locations/r1r0fyd/observations
+    ###
+    unless @_geohash
+      return {}
+    try
+      resp = await get "#{API_BASE}/#{@_location}/#{API_OBSERVATIONS}"
+      @_response_timestamp = await resp.metadata.response_timestamp
+      return resp.data
+    catch
+      return {}
 
 module.exports = Api
