@@ -1,6 +1,6 @@
 {
   "name": "weather-au-api",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "NodeJS library for accessing api.weather.bom.gov.au",
   "main": "api-min.js",
   "repository": "git@github.com:nqngo/weather-au-api.git",

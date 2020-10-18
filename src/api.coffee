@@ -43,7 +43,8 @@ class Api
       @_location = await "#{API_LOCATION}/#{@_geohash}"
 
       return resp.data
-    catch
+    catch error
+      console.log error
       return []
 
   forecasts_daily: ->
@@ -59,7 +60,8 @@ class Api
       resp = await get "#{API_BASE}/#{@_location}/#{API_FORECAST_DAILY}"
       @_response_timestamp = await resp.metadata.response_timestamp
       return resp.data
-    catch
+    catch error
+      console.error error
       return []
 
   warnings: ->
@@ -75,7 +77,8 @@ class Api
       resp = await get "#{API_BASE}/#{@_location}/#{API_WARNINGS}"
       @_response_timestamp = await resp.metadata.response_timestamp
       return resp.data
-    catch
+    catch error
+      console.error error
       return []
 
   warning: (id, wordwrap) ->
@@ -99,7 +102,8 @@ class Api
 
       output.message = htmlToText.fromString resp.data.message, config
       return output
-    catch
+    catch error
+      console.error error
       return {}
 
   observations: ->
@@ -115,7 +119,8 @@ class Api
       resp = await get "#{API_BASE}/#{@_location}/#{API_OBSERVATIONS}"
       @_response_timestamp = await resp.metadata.response_timestamp
       return resp.data
-    catch
+    catch error
+      console.error error
       return {}
 
 module.exports = Api
