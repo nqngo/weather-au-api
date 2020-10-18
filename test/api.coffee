@@ -37,8 +37,6 @@ describe 'Api', ->
     # Set today to midnight
     today = new Date()
     today.setHours 0,0,0,0
-    # Test if it contains today result
-    expect(new Date result[0].date).to.equalDate(today)
     # Test membership for each result
     for day in result
       expect(day).to.include.all.keys 'rain', 'uv', 'astronomical', 'temp_max',
@@ -46,10 +44,12 @@ describe 'Api', ->
 
   it 'gets weather warnings for Carlton if there is any', ->
     current_timestamp = new Date()
+    # Offset the timestamp by a second
+    offset_timestamp = new Date(current_timestamp - 1000)
     result = await api.warnings()
     # Only check if we fetch the response from server
     # There might not be any warning
-    expect(new Date api.response_timestamp()).to.be.afterTime current_timestamp
+    expect(new Date api.response_timestamp()).to.be.afterTime offset_timestamp
 
   it 'get the warning with ID VIC_RC022_IDV36310', ->
     result = await api.warning 'VIC_RC022_IDV36310'
