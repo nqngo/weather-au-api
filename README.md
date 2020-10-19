@@ -49,6 +49,7 @@ This will bypass the need to use the `search()` function to set location.
 api = new Api('r1r0fyd');
 ```
 
+------------------------------------
 ### Set the search location
 #### api.search(string)
 
@@ -63,6 +64,7 @@ carlton2 = await api.search('Carlton+VIC');
 console.log(carlton2);
 ```
 
+------------------------------------
 ### Get the daily forecasts
 #### api.forecasts_daily()
 
@@ -75,6 +77,7 @@ forecasts = await api.forecasts_daily();
 console.log(forecasts);
 ```
 
+------------------------------------
 ### Get warnings
 #### api.warnings()
 
@@ -87,6 +90,7 @@ warnings = await api.warnings();
 console.log(warnings);
 ```
 
+------------------------------------
 ### Get specific warning
 #### api.warning(warning_id)
 
@@ -98,6 +102,7 @@ warning = await api.warning('VIC_RC022_IDV36310');
 console.log(warning);
 ```
 
+------------------------------------
 ### Get observations reading
 #### api.observations()
 
@@ -109,6 +114,7 @@ observations = await api.observations();
 console.log(observations);
 ```
 
+------------------------------------
 ### Get last response timestamp
 #### api.response_timestamp()
 
@@ -116,4 +122,4 @@ Get the last response timestamp.
 
 ```javascript
 timestamp = api.response_timestamp()
-``` 
+```
