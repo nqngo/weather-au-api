@@ -24,5 +24,12 @@
     "prepack": "yarn build && yarn min",
     "lint": "yarn coffeelint src/ test/",
     "test": "yarn mocha -r coffeescript/register --extension coffee"
-  }
+  },
+  "keywords": [
+    "weather",
+    "api",
+    "australia",
+    "bom.gov.au",
+    "async"
+  ]
 }

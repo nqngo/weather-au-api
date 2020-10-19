@@ -31,6 +31,11 @@ describe 'Api', ->
       r.name is 'Carlton' and r.state is 'VIC' and r.postcode is '3053'
     expect(carlton).to.have.lengthOf 1
 
+  it 'shows Carlton today 3-hourly forecasts', ->
+    result = await api.forecasts_3hourly()
+    for trihour in result
+      expect(trihour).to.include.all.keys 'rain', 'temp', 'wind', 'is_night'
+
   it 'shows Carlton daily forecasts for the next 7 days', ->
     result = await api.forecasts_daily()
     expect(result).to.have.lengthOf.at.least 7

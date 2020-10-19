@@ -43,8 +43,7 @@ class Api
       @_location = await "#{API_LOCATION}/#{@_geohash}"
 
       return resp.data
-    catch error
-      console.log error
+    catch
       return []
 
   forecasts_daily: ->
@@ -60,8 +59,25 @@ class Api
       resp = await get "#{API_BASE}/#{@_location}/#{API_FORECAST_DAILY}"
       @_response_timestamp = await resp.metadata.response_timestamp
       return resp.data
-    catch error
-      console.error error
+    catch
+      return []
+
+  forecasts_3hourly: ->
+    ###
+    Return the 3-hourly forecast of today.
+    Return an empty array if not found.
+    Example:
+    https://api.weather.bom.gov.au/v1/locations/r1r0fyd/forecasts/3-hourly
+    ###
+    unless @_geohash
+      return []
+    try
+      # Truncate the location geohash
+      trun_location = @_location.slice 0, -1
+      resp = await get "#{API_BASE}/#{trun_location}/#{API_FORECAST_3HOURLY}"
+      @_response_timestamp = await resp.metadata.response_timestamp
+      return resp.data
+    catch
       return []
 
   warnings: ->
@@ -77,8 +93,7 @@ class Api
       resp = await get "#{API_BASE}/#{@_location}/#{API_WARNINGS}"
       @_response_timestamp = await resp.metadata.response_timestamp
       return resp.data
-    catch error
-      console.error error
+    catch
       return []
 
   warning: (id, wordwrap) ->
@@ -102,8 +117,7 @@ class Api
 
       output.message = htmlToText.fromString resp.data.message, config
       return output
-    catch error
-      console.error error
+    catch
       return {}
 
   observations: ->
@@ -119,8 +133,7 @@ class Api
       resp = await get "#{API_BASE}/#{@_location}/#{API_OBSERVATIONS}"
       @_response_timestamp = await resp.metadata.response_timestamp
       return resp.data
-    catch error
-      console.error error
+    catch
       return {}
 
 module.exports = Api
