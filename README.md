@@ -1,7 +1,7 @@
 # weather-au-api
 
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/nqngo/weather-au-api/CI%20test/main?label=ci)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/nqngo/weather-au-api)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/nqngo/weather-au-api)](https://github.com/nqngo/weather-au-api)
 [![GitHub license](https://img.shields.io/github/license/nqngo/weather-au-api)](https://github.com/nqngo/weather-au-api/blob/main/LICENSE)
 
 NodeJS API library for accessing api.weather.bom.gov.au
@@ -21,19 +21,24 @@ npm install weather-au-api
 Through `yarn`:
 
 ```bash
-yarn install weather-au-api
+yarn add weather-au-api
 ```
 
 ## Example Usage
 
 ```javascript
-let Api = require('weather-au-api');
-let api = new Api();
-# Set your current location
-api.search('3053');
-# Retrieve the daily forecasts for the next 7 days
-let resp = await api.forecasts_daily();
-console.log(resp)
+var Api = require('weather-au-api');
+var api = new Api();
+
+main = async function() {
+  # Set your current location
+  await api.search('3053');
+  # Retrieve the daily forecasts for the next 7 days
+  let resp = await api.forecasts_daily();
+  console.log(resp);
+};
+
+main();
 ```
 
 ## Usage
@@ -62,6 +67,19 @@ carlton = await api.search('3053');
 console.log(carlton.data);
 carlton2 = await api.search('Carlton+VIC');
 console.log(carlton2);
+```
+
+------------------------------------
+### Get the 3-hourly forecasts
+#### api.forecasts_3hourly()
+
+Get bom.gov.au 3hourly forecasts for today.
+A `geohash` must be set when initialising or through running `api.search()`.
+Return a JSON list of forecasts.
+
+```javascript
+forecasts = await api.forecasts_3hourly();
+console.log(forecasts);
 ```
 
 ------------------------------------
@@ -121,5 +139,5 @@ console.log(observations);
 Get the last response timestamp.
 
 ```javascript
-timestamp = api.response_timestamp()
+timestamp = api.response_timestamp();
 ```
